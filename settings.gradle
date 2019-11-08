@@ -4,3 +4,6 @@ rootProject.name='AndroidAdLibs'
 include ':common'
 project(':common').projectDir = new File(settingsDir, '../AndroidDependencyLib/common')
 
+include ':permission'
+project(':permission').projectDir = new File(settingsDir, '../AndroidDependencyLib/permission')
+

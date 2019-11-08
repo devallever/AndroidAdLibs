@@ -1,13 +1,11 @@
 package com.allever.lib.ad.mimo
 
-import android.Manifest
-import android.app.Activity
 import android.content.Context
-import android.content.pm.PackageManager
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import com.allever.lib.ad.ADType
+import com.allever.lib.ad.AdListener
+import com.allever.lib.ad.AdManager
+import com.allever.lib.ad.BaseAd
 import com.allever.lib.ad.mimo.MiMoConstants.XIAO_MI_APP_KEY
 import com.allever.lib.ad.mimo.MiMoConstants.XIAO_MI_APP_TOKEN
 import com.allever.lib.common.app.App
@@ -21,9 +19,9 @@ import com.miui.zeus.mimo.sdk.listener.MimoAdListener
 import com.miui.zeus.mimo.sdk.listener.MimoRewardVideoListener
 import com.xiaomi.ad.common.pojo.AdType
 
-object MiMoAdHelper {
+object MiMoAdHelper: AdManager {
 
-    fun init(context: Context, appId: String) {
+    override fun init(context: Context, appId: String) {
         // 如果担心sdk自升级会影响开发者自身app的稳定性可以关闭，
         // 但是这也意味着您必须得重新发版才能使用最新版本的sdk, 建议开启自升级
         MimoSdk.setEnableUpdate(false)
@@ -44,53 +42,39 @@ object MiMoAdHelper {
         })
     }
 
-    fun loadEncourageDownload(adPosition: String, adListener: AdListener?): IAdWorker {
-        val adWorker =
-            AdWorkerFactory.getAdWorker(App.context, null, object : MimoAdListener {
-                override fun onAdPresent() {
-                    log("激励下载 onAdPresent")
-                    adListener?.onShowed()
-                }
+    override fun createAd(adType: ADType): BaseAd? {
+        return when(adType) {
+            ADType.BANNER -> {
+                return createBannerAd()
+            }
+            ADType.INSERT -> {
+                return createInsertAd()
+            }
+            ADType.VIDEO -> {
+                return createVideoAd()
+            }
+            ADType.DOWNLOAD -> {
+                return createDownloadAd()
+            }
 
-                override fun onAdClick() {
-                    log("激励下载 onAdClick")
-                }
-
-                override fun onAdDismissed() {
-                    log("激励下载 onAdDismissed")
-                    adListener?.onDismiss()
-                }
-
-                override fun onAdFailed(s: String) {
-                    log("激励下载 请求失败 : $s")
-                    adListener?.onFailed()
-                }
-
-                override fun onAdLoaded(i: Int) {
-                    log("激励下载 onAdLoaded : $i")
-                    adListener?.onLoaded()
-                }
-
-                override fun onStimulateSuccess() {
-                    log("激励下载  onStimulateSuccess")
-                    adListener?.onStimulateSuccess()
-                }
-            }, AdType.AD_STIMULATE_DOWNLOAD)
-        adWorker.load(adPosition)
-        return adWorker
+            else -> null
+        }
     }
 
-    fun loadInsert(
-        adPosition: String, container: ViewGroup,
-        adListener: AdListener?
-    ): IAdWorker? {
-        val worker = createAdWorker(AdType.AD_INTERSTITIAL, container, adListener)
-        try {
-            worker?.load(adPosition)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return worker
+    override fun createBannerAd(): BaseAd? {
+        return MiMoBanner()
+    }
+
+    override fun createInsertAd(): BaseAd? {
+        return MiMoInsert()
+    }
+
+    override fun createVideoAd(): BaseAd? {
+        return MiMoVideo()
+    }
+
+    override fun createDownloadAd(): BaseAd? {
+        return MiMoDownload()
     }
 
     fun show(adWorker: IAdWorker?) {
@@ -101,32 +85,26 @@ object MiMoAdHelper {
         }
     }
 
-    fun loadAndShowBanner(
+    fun load(
+        adType: AdType,
         adPosition: String,
-        container: ViewGroup,
+        container: ViewGroup?,
         adListener: AdListener?
     ): IAdWorker? {
-        val worker = createAdWorker(AdType.AD_BANNER, container, adListener)
-        try {
-            worker?.loadAndShow(adPosition)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return worker
+        val adWorker = createAdWorker(adType, container, adListener)
+        adWorker?.load(adPosition)
+        return adWorker
     }
 
-    fun loadAndShowSplash(
+    fun loadAndShow(
+        adType: AdType,
         adPosition: String,
-        container: ViewGroup,
+        container: ViewGroup?,
         adListener: AdListener?
     ): IAdWorker? {
-        val worker = createAdWorker(AdType.AD_SPLASH, container, adListener)
-        try {
-            worker?.loadAndShow(adPosition)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return worker
+        val adWorker = createAdWorker(adType, container, adListener)
+        adWorker?.loadAndShow(adPosition)
+        return adWorker
     }
 
     fun loadRewardVideo(adPosition: String, adListener: AdListener?): IRewardVideoAdWorker? {
@@ -189,76 +167,9 @@ object MiMoAdHelper {
         return adWorker
     }
 
-    fun showVideo(iRewardVideoAdWorker: IRewardVideoAdWorker?) {
-        try {
-            iRewardVideoAdWorker?.show()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    fun destroyVideo(iRewardVideoAdWorker: IRewardVideoAdWorker?) {
-        try {
-            iRewardVideoAdWorker?.recycle()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    fun destroy(adWorker: IAdWorker?) {
-        try {
-            adWorker?.recycle()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    @Deprecated("")
-    fun requestAdPermission(activity: Activity, msg: String) {
-        // 如果api >= 23 需要显式申请权限
-        if (ContextCompat.checkSelfPermission(
-                activity,
-                Manifest.permission.READ_PHONE_STATE
-            ) !== PackageManager.PERMISSION_GRANTED
-            || ContextCompat.checkSelfPermission(
-                activity,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) !== PackageManager.PERMISSION_GRANTED
-            || ContextCompat.checkSelfPermission(
-                activity,
-                Manifest.permission.READ_CONTACTS
-            ) !== PackageManager.PERMISSION_GRANTED
-            || ContextCompat.checkSelfPermission(
-                activity,
-                Manifest.permission.INTERNET
-            ) !== PackageManager.PERMISSION_GRANTED
-        ) {
-
-            AlertDialog.Builder(activity)
-                .setMessage(msg)
-                .setPositiveButton("同意") { dialog, which ->
-                    dialog.dismiss()
-                    ActivityCompat.requestPermissions(
-                        activity,
-                        arrayOf(
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_PHONE_STATE,
-                            Manifest.permission.READ_CONTACTS
-                        ),
-                        0
-                    )
-                }
-                .setNegativeButton("拒绝") { dialog, which ->
-                    dialog.dismiss()
-                }
-                .create()
-                .show()
-        }
-    }
-
     private fun createAdWorker(
         adType: AdType,
-        container: ViewGroup,
+        container: ViewGroup?,
         adListener: AdListener?
     ): IAdWorker? {
         var worker: IAdWorker? = null
@@ -296,5 +207,29 @@ object MiMoAdHelper {
             adListener?.onFailed()
         }
         return worker
+    }
+
+    fun showVideo(iRewardVideoAdWorker: IRewardVideoAdWorker?) {
+        try {
+            iRewardVideoAdWorker?.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun destroy(adWorker: IAdWorker?) {
+        try {
+            adWorker?.recycle()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun destroyVideo(iRewardVideoAdWorker: IRewardVideoAdWorker?) {
+        try {
+            iRewardVideoAdWorker?.recycle()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
