@@ -21,7 +21,7 @@ import com.xiaomi.ad.common.pojo.AdType
 
 object MiMoAdHelper: AdManager {
 
-    override fun init(context: Context, appId: String) {
+    override fun init(context: Context, appId: String, appKey: String, appToken: String) {
         // 如果担心sdk自升级会影响开发者自身app的稳定性可以关闭，
         // 但是这也意味着您必须得重新发版才能使用最新版本的sdk, 建议开启自升级
         MimoSdk.setEnableUpdate(false)

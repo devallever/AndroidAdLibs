@@ -4,7 +4,7 @@ import android.content.Context
 
 interface AdManager {
 
-    fun init(context: Context, appId: String)
+    fun init(context: Context, appId: String, appKey: String = "", appToken: String = "")
 
     fun createAd(adType: ADType): BaseAd?
 
