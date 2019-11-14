@@ -1,6 +1,7 @@
 package com.allever.lib.ad.mimo
 
 import android.content.Context
+import android.view.View
 import android.view.ViewGroup
 import com.allever.lib.ad.ADType
 import com.allever.lib.ad.AdListener
@@ -178,11 +179,13 @@ object MiMoAdHelper: AdManager {
                 override fun onAdLoaded(p0: Int) {
                     log("onAdLoaded")
                     adListener?.onLoaded()
+                    container?.visibility = View.VISIBLE
                 }
 
                 override fun onAdPresent() {
                     log("onAdPresent")
                     adListener?.onShowed()
+                    container?.visibility = View.VISIBLE
                 }
 
                 override fun onAdFailed(msg: String?) {
