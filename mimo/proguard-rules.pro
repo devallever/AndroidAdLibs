@@ -20,6 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-# 米盟
+# 米盟 需要在app的混淆文件中配置
 -keep class com.xiaomi.ad.**{*;}
 -keep class com.miui.zeus.**{*;}
