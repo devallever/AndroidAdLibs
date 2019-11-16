@@ -8,6 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="加载显示插屏"/>
+    <Button
+        android:id="@+id/btnBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="加载Banner"
+        android:layout_below="@id/btnInsert"/>
 
     <LinearLayout
         android:id="@+id/bannerContainer"

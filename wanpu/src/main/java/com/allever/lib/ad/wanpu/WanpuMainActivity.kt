@@ -18,6 +18,7 @@ class WanpuMainActivity: BaseActivity(), View.OnClickListener {
         val bannerContainer = findViewById<LinearLayout>(R.id.bannerContainer)
         bannerAd?.loadAndShow("", bannerContainer, null)
 
+        findViewById<View>(R.id.btnBanner).setOnClickListener(this)
         findViewById<View>(R.id.btnInsert).setOnClickListener(this)
         mHandler.postDelayed({
             AdHelper.createInsertAd()?.load("", null, null)
@@ -29,6 +30,12 @@ class WanpuMainActivity: BaseActivity(), View.OnClickListener {
             R.id.btnInsert -> {
                 val insertAd = AdHelper.createAd(ADType.INSERT)
                 insertAd?.loadAndShow("", null, null)
+            }
+            R.id.btnBanner -> {
+                val bannerAd = AdHelper.createAd(ADType.BANNER)
+                val bannerContainer = findViewById<LinearLayout>(R.id.bannerContainer)
+                bannerContainer?.removeAllViews()
+                bannerAd?.loadAndShow("", bannerContainer, null)
             }
         }
     }

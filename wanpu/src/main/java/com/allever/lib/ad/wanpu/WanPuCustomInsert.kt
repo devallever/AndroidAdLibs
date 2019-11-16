@@ -10,6 +10,7 @@ import cn.waps.AdInfo
 import cn.waps.AppConnect
 import com.allever.lib.ad.AdListener
 import com.allever.lib.ad.BaseAd
+import com.allever.lib.ad.wanpu.WanPuAdHelper.mIns
 import com.allever.lib.common.app.App
 import com.allever.lib.common.util.ActivityCollector
 import com.bumptech.glide.Glide
@@ -20,7 +21,7 @@ class WanPuCustomInsert: BaseAd() {
     private var mAdInfo: AdInfo? = null
 
     override fun load(adPosition: String, container: ViewGroup?, adListener: AdListener?) {
-        mAdInfo = AppConnect.getInstance(App.context).adInfo
+        mAdInfo = mIns.adInfo
         if (mAdInfo != null) {
             adListener?.onLoaded()
         } else {
@@ -44,15 +45,15 @@ class WanPuCustomInsert: BaseAd() {
         tvDetail.text = mAdInfo?.description
         Glide.with(App.context).load(mAdInfo?.adIcon).into(ivLogo)
         view.findViewById<View>(R.id.adContainer).setOnClickListener {
-            AppConnect.getInstance(App.context).downloadAd(App.context, mAdInfo?.adId)
+            mIns.downloadAd(App.context, mAdInfo?.adId)
             mInsertDialog?.dismiss()
         }
         view.findViewById<View>(R.id.detailContentContainer).setOnClickListener {
-            AppConnect.getInstance(App.context).downloadAd(App.context, mAdInfo?.adId)
+            mIns.downloadAd(App.context, mAdInfo?.adId)
             mInsertDialog?.dismiss()
         }
         view.findViewById<View>(R.id.btnDownloadBottom).setOnClickListener {
-            AppConnect.getInstance(App.context).downloadAd(App.context, mAdInfo?.adId)
+            mIns.downloadAd(App.context, mAdInfo?.adId)
             mInsertDialog?.dismiss()
         }
         view.findViewById<View>(R.id.tvClose).setOnClickListener {
