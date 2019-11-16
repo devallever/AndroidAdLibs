@@ -9,3 +9,5 @@
 ## 2.配置contentProvider
 
 ## 3.配置混淆
+
+## 4.配置讯飞appid

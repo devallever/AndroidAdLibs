@@ -36,5 +36,14 @@
         </provider>
         -->
 
+<!--
+
+        //讯飞广告 替换为平台注册的appid
+        <meta-data
+            android:name="IFLYTEK_APPKEY_AD"
+            android:value="5dc26029" />
+
+-->
+
     </application>
 </manifest>
