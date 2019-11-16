@@ -1,0 +1,40 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.allever.lib.ad.ifly" >
+
+    <!--以下权限需在应用中注册-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <application>
+
+        <activity android:name=".NativeFullVideoActivity"
+            android:theme="@style/IFlyFullScreenStyle"/>
+
+        <!-- 项目中报红无影响，必需添加 -->
+        <service
+            android:name="com.iflytek.voiceads.download.DownloadService"
+            android:stopWithTask="true" />
+        <!-- 项目中报红无影响，必需添加 -->
+        <activity
+            android:name="com.iflytek.voiceads.request.IFLYBrowser"
+            android:screenOrientation="portrait" />
+
+        <!-- 讯飞ad使用的是support库
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false" android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/ifly_ad_fielpath"/>
+        </provider>
+        -->
+
+    </application>
+</manifest>

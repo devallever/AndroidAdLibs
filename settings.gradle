@@ -1,4 +1,4 @@
-include ':app', ':adlib', ':mimo'
+include ':app', ':adlib', ':mimo', ':iflyad'
 rootProject.name='AndroidAdLibs'
 
 include ':common'
@@ -6,4 +6,7 @@ project(':common').projectDir = new File(settingsDir, '../AndroidDependencyLib/c
 
 include ':permission'
 project(':permission').projectDir = new File(settingsDir, '../AndroidDependencyLib/permission')
+
+include ':httpsglide'
+project(':httpsglide').projectDir = new File(settingsDir, '../AndroidDependencyLib/httpsglide')
 
