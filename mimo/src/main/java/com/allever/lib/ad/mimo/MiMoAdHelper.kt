@@ -78,6 +78,10 @@ object MiMoAdHelper: AdManager {
         return MiMoDownload()
     }
 
+    override fun destroy(context: Context) {
+
+    }
+
     fun show(adWorker: IAdWorker?) {
         try {
             adWorker?.show()

@@ -26,4 +26,8 @@ object AdHelper {
     fun createVideoAd(): BaseAd? {
         return mAdManager?.createVideoAd()
     }
+
+    fun destroy(context: Context) {
+        mAdManager?.destroy(context)
+    }
 }

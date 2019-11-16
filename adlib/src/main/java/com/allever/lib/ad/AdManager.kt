@@ -16,4 +16,6 @@ interface AdManager {
 
     fun createDownloadAd(): BaseAd?
 
+    fun destroy(context: Context)
+
 }
