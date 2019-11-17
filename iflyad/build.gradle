@@ -5,22 +5,16 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
 
-
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
-//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-
-
         //解决组件未安装错误
         ndk {
             abiFilters "armeabi"
         }
-
     }
 
     //
@@ -36,7 +30,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
