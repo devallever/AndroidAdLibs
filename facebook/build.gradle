@@ -1,21 +1,17 @@
-apply plugin: 'com.android.application'
-
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
+
     defaultConfig {
-        applicationId "com.allever.app.ad"
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -23,10 +19,11 @@ android {
         }
     }
 }
-
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':permission')
-    implementation project(path: ':wanpu')
-    implementation project(path: ':facebook')
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':AdsLib')
+    api ('com.facebook.android:audience-network-sdk:4.99.0')
+//    api ('com.facebook.android:audience-network-sdk:4.99.0'){
+//        exclude group:"com.google.android.gms"
+//    }
 }
