@@ -1,5 +1,5 @@
 include ':app', ':iflyad'
-rootProject.name='AndroidAdLibs'
+rootProject.name='AndroidAdLibsSupport'
 
 include ':adlib'
 project(':adlib').projectDir = new File(settingsDir, '../AndroidAdLibs/adlib')
