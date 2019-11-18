@@ -1,21 +1,17 @@
-apply plugin: 'com.android.application'
-
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
+
     defaultConfig {
-        applicationId "com.allever.app.ad"
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -23,10 +19,9 @@ android {
         }
     }
 }
-
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':permission')
-    implementation project(path: ':wanpu')
-    implementation project(path: ':admob')
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':AdsLib')
+    implementation 'com.google.android.gms:play-services-ads:10.2.1'
+
 }
