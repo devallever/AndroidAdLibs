@@ -1,12 +1,17 @@
-include ':app', ':adlib', ':mimo', ':iflyad', ':wanpu'
+include ':app', ':iflyad'
 rootProject.name='AndroidAdLibs'
 
+include ':adlib'
+project(':adlib').projectDir = new File(settingsDir, '../AndroidAdLibs/adlib')
+
 include ':common'
-project(':common').projectDir = new File(settingsDir, '../AndroidDependencyLib/common')
+project(':common').projectDir = new File(settingsDir, '../AndroidDependencyLibSupport/common')
 
 include ':permission'
-project(':permission').projectDir = new File(settingsDir, '../AndroidDependencyLib/permission')
+project(':permission').projectDir = new File(settingsDir, '../AndroidDependencyLibSupport/permission')
 
 include ':httpsglide'
-project(':httpsglide').projectDir = new File(settingsDir, '../AndroidDependencyLib/httpsglide')
+project(':httpsglide').projectDir = new File(settingsDir, '../AndroidDependencyLibSupport/httpsglide')
 
+include ':imageloader'
+project(':imageloader').projectDir = new File(settingsDir, '../AndroidDependencyLib/imageloader')

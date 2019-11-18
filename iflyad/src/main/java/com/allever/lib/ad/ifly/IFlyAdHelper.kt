@@ -54,4 +54,8 @@ object IFlyAdHelper: AdManager {
     fun startNativeVideoAd(context: Context, adPosition: String) {
         NativeFullVideoActivity.start(context, adPosition)
     }
+
+    override fun destroy(context: Context) {
+
+    }
 }

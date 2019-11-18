@@ -1,7 +1,7 @@
 package com.allever.lib.ad.ifly
 
+import android.support.v7.app.AlertDialog
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import com.allever.lib.ad.AdListener
 import com.allever.lib.ad.BaseAd
 import com.allever.lib.common.app.App
