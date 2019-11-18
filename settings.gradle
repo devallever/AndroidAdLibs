@@ -1,4 +1,4 @@
-include ':app', ':adlib', ':mimo', ':iflyad', ':wanpu', ':AdsLib', ':admob'
+include ':app', ':adlib', ':mimo', ':iflyad', ':wanpu', ':AdsLib', ':admob', ':admob_lite'
 rootProject.name='AndroidAdLibs'
 
 include ':common'

@@ -19,10 +19,11 @@ android {
         }
     }
 }
-
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':AdsLib')
-    implementation 'com.google.android.gms:play-services-ads:10.2.1'
-
+    api project(':AdsLib')
+    api ('com.google.android.gms:play-services-ads-lite:10.2.1')
+//    api ('com.google.android.gms:play-services-ads-lite:10.2.1',{
+//        exclude group: 'com.android.support', module: 'support-v4'
+//    })
 }
