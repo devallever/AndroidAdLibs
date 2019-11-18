@@ -1,65 +1,64 @@
-package com.radishmobile.admob;
+package com.allever.lib.ad.admob;
 
 import android.content.Context;
+import android.view.View;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.mob.bean.Model;
-import com.mob.core.MobInterstitialAd;
+import com.mob.core.MobBannerAd;
 import com.mob.tool.Utils;
 
 /**
- * Created by Administrator on 2016/8/25.
+ * Created by Administrator on 2016/8/26.
  */
-public class MobAdmobInter extends MobInterstitialAd {
+public class MobAdmobBan extends MobBannerAd {
 
-    public MobAdmobInter(Context context, String pub) {
+    private  AdView admobbanner = null;
+    public MobAdmobBan(Context context, String pub){
         super(context,pub);
     }
-
-    private InterstitialAd interstitialAd = null;
-    private AdRequest adRequest = null;
     @Override
-    public void loadAd( ) {
-         interstitialAd = new InterstitialAd(mContext);
-        interstitialAd.setAdUnitId(mPub);
-        interstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-            }
-
+    public void loadAd() {
+        admobbanner  = new AdView(mContext);
+        admobbanner.setAdSize(AdSize.BANNER);
+        admobbanner.setAdUnitId(mPub);
+        admobbanner.setAdListener(new AdListener() {
             @Override
             public void onAdFailedToLoad(int i) {
                 super.onAdFailedToLoad(i);
                 if(mAdListener != null) {
-                    Utils.printInfo("loadAdFaild Admob");
-                    mAdListener.onAdFailedToLoad();
+                    Utils.printInfo("faild " + mPub);
+                    mAdListener.onAdBanFailedToLoad();
                     mAdListener = null;  //有些sdk可能一次请求回调多次失败或成功状态，那么我们应该避免这些问题
                 }
             }
-
             @Override
             public void onAdLoaded() {
                 super.onAdLoaded();
                 if(mAdListener != null) {
-                    Utils.printInfo("onAdLoaded Admob");
-                    mAdListener.onAdLoaded(MobAdmobInter.this);
+                    Utils.printInfo("suceess " + mPub);
+                    mAdListener.onAdBanLoaded(MobAdmobBan.this);
                     mAdListener = null;  //有些sdk可能一次请求回调多次失败或成功状态，那么我们应该避免这些问题
                 }
             }
         });
+        Utils.printInfo("loadAd "+getTag()+mPub);
+
         //加载请求
         AdRequest.Builder reqBuild = new AdRequest.Builder().addTestDevice("F711E9F86475CB61F3477AB351BC65B2");
         for (String device: Model.getInstance().getTestDevice()) {
             reqBuild.addTestDevice(device);
         }
-        adRequest = reqBuild.build();
+        admobbanner.loadAd( reqBuild.build());
 
-        interstitialAd.loadAd(adRequest);
-        Utils.printInfo("loadAd "+getTag()+mPub);
+    }
 
+    @Override
+    public View getBannerView() {
+        return admobbanner;
     }
 
     @Override
@@ -68,13 +67,7 @@ public class MobAdmobInter extends MobInterstitialAd {
     }
 
     @Override
-    public void showAd() {
-        if(interstitialAd != null) {
-            interstitialAd.show();
-        }
-    }
-    @Override
     public String getTag() {
-        return "Admob Inter";
+        return "Admob ban";
     }
 }
