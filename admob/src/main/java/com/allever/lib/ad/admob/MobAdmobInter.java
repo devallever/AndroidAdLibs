@@ -51,7 +51,7 @@ public class MobAdmobInter extends MobInterstitialAd {
             }
         });
         //加载请求
-        AdRequest.Builder reqBuild = new AdRequest.Builder().addTestDevice("F711E9F86475CB61F3477AB351BC65B2");
+        AdRequest.Builder reqBuild = new AdRequest.Builder().addTestDevice("1621DB3C172AE6711BA840F4AEF6EF48");
         for (String device: Model.getInstance().getTestDevice()) {
             reqBuild.addTestDevice(device);
         }

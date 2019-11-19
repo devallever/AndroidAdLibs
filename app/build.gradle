@@ -28,5 +28,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':permission')
     implementation project(path: ':wanpu')
+    implementation project(path: ':admob')
     implementation project(path: ':facebook')
 }

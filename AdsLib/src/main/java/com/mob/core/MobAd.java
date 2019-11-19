@@ -13,9 +13,9 @@ import org.json.JSONObject;
 
 import java.util.LinkedList;
 
+
 /**
- * 广告引擎类
- * Created by maozhi on 2016/8/25.
+ * @author allever
  */
 public abstract class MobAd implements IMobAd {
 
@@ -25,8 +25,8 @@ public abstract class MobAd implements IMobAd {
 
     protected LinkedList<MobAdbean> mPolicyAds = new LinkedList<>();
 
-    public MobAd(Context context){
-        mContext =context;
+    public MobAd(Context context) {
+        mContext = context;
         Utils.gContext = context.getApplicationContext();
         Model model = Model.getInstance(); //初始化model
     }
@@ -34,13 +34,13 @@ public abstract class MobAd implements IMobAd {
     public abstract void popAdShow();
 
     //解析数据
-    protected void paraseData(LinkedList<MobAdbean> policyAds , String data) {
-        try{
+    protected void paraseData(LinkedList<MobAdbean> policyAds, String data) {
+        try {
             policyAds.clear();  //先清空策略
 
             JSONObject jsonObject = new JSONObject(data);
             //该属性为banner特有，默然将banner放置在底部
-            mBannerPos =  jsonObject.optInt("pos", RelativeLayout.ALIGN_PARENT_BOTTOM);
+            mBannerPos = jsonObject.optInt("pos", RelativeLayout.ALIGN_PARENT_BOTTOM);
 
             //获取默认的pub值
             MobAdbean.defPubA = jsonObject.optString("dpa");
@@ -49,9 +49,9 @@ public abstract class MobAd implements IMobAd {
             JSONArray arrayBeans = jsonObject.optJSONArray("pl");
 
             //遍历数组获取pub值
-            for (int i = 0 ;i < arrayBeans.length(); ++i) {
+            for (int i = 0; i < arrayBeans.length(); ++i) {
                 JSONObject jsonadbean = arrayBeans.getJSONObject(i);
-                String categroy =  jsonadbean.optString("cate");
+                String categroy = jsonadbean.optString("cate");
                 String pub = jsonadbean.optString("pub");
                 String appid = jsonadbean.optString("appid");
                 MobAdbean adbean = new MobAdbean();
@@ -60,8 +60,8 @@ public abstract class MobAd implements IMobAd {
                 adbean.setAppId(appid);
                 policyAds.add(adbean);
             }
-        }catch (Exception e) {
-            Utils.printInfo("parsedata + " +e.toString());
+        } catch (Exception e) {
+            Utils.printInfo("parsedata + " + e.toString());
             e.printStackTrace();
         }
     }

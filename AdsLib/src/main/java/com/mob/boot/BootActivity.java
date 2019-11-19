@@ -31,7 +31,7 @@ public class BootActivity extends Activity implements NotificationCenter.NotifyO
     private Runnable mDelayRunnable = new Runnable() {
         @Override
         public void run() {
-            if(!isFinishing()) { //activity还在显示中
+            if (!isFinishing()) { //activity还在显示中
                 NotificationCenter.getIns().notifyObserver(NotificationCenter.NOTF_REQUEST_AD_TIMEOUT);
                 finish();
             }
@@ -46,8 +46,8 @@ public class BootActivity extends Activity implements NotificationCenter.NotifyO
 
         //不显示程序的标题栏
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        WindowManager.LayoutParams lp=getWindow().getAttributes();
-        lp.dimAmount=0.5f;
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.dimAmount = 0.5f;
         getWindow().setAttributes(lp);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
@@ -58,11 +58,11 @@ public class BootActivity extends Activity implements NotificationCenter.NotifyO
         mHandle.postDelayed(mDelayRunnable, TIMEOUT_AD);
 
         //加载动画
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         RelativeLayout layout = new RelativeLayout(this);
         layout.setLayoutParams(layoutParams);
         ImageView imageView = new ImageView(this);
-        layoutParams = new RelativeLayout.LayoutParams(Utils.dip2px(this, 100f),Utils.dip2px(this,100f));
+        layoutParams = new RelativeLayout.LayoutParams(Utils.dip2px(this, 100f), Utils.dip2px(this, 100f));
         layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         layout.addView(imageView, layoutParams);
         setContentView(layout);
@@ -90,7 +90,8 @@ public class BootActivity extends Activity implements NotificationCenter.NotifyO
     }
 
     @Override
-    public void onBackPressed() {}
+    public void onBackPressed() {
+    }
 
     @Override
     protected void onDestroy() {
@@ -111,7 +112,7 @@ public class BootActivity extends Activity implements NotificationCenter.NotifyO
     @Override
     public void onNotify(int id, Object object) {
 
-        if(id == NotificationCenter.NOTF_STOP_BOOTACTIVITY) { //如果收到停止启动页面
+        if (id == NotificationCenter.NOTF_STOP_BOOTACTIVITY) { //如果收到停止启动页面
             finish();
         }
     }

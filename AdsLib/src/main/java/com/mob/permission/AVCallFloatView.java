@@ -168,7 +168,7 @@ public class AVCallFloatView extends FrameLayout {
         this.post(new AnchorAnimRunnable(Math.abs(animTime), xDistance, yDistance, System.currentTimeMillis()));
     }
 
-    public int dp2px(float dp){
+    public int dp2px(float dp) {
         final float scale = getContext().getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
     }

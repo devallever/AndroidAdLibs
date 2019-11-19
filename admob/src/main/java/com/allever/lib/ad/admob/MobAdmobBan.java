@@ -3,6 +3,7 @@ package com.allever.lib.ad.admob;
 import android.content.Context;
 import android.view.View;
 
+import com.allever.lib.common.util.log.LogUtils;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -29,6 +30,7 @@ public class MobAdmobBan extends MobBannerAd {
             @Override
             public void onAdFailedToLoad(int i) {
                 super.onAdFailedToLoad(i);
+                LogUtils.INSTANCE.d("加载 AdMob Banner 失败 code = " + i + "pub = " + mPub);
                 if(mAdListener != null) {
                     Utils.printInfo("faild " + mPub);
                     mAdListener.onAdBanFailedToLoad();
@@ -38,6 +40,7 @@ public class MobAdmobBan extends MobBannerAd {
             @Override
             public void onAdLoaded() {
                 super.onAdLoaded();
+                LogUtils.INSTANCE.d("加载 AdMob Banner 成功 code = "  +  "pub = " + mPub);
                 if(mAdListener != null) {
                     Utils.printInfo("suceess " + mPub);
                     mAdListener.onAdBanLoaded(MobAdmobBan.this);
@@ -48,7 +51,7 @@ public class MobAdmobBan extends MobBannerAd {
         Utils.printInfo("loadAd "+getTag()+mPub);
 
         //加载请求
-        AdRequest.Builder reqBuild = new AdRequest.Builder().addTestDevice("F711E9F86475CB61F3477AB351BC65B2");
+        AdRequest.Builder reqBuild = new AdRequest.Builder().addTestDevice("1621DB3C172AE6711BA840F4AEF6EF48");
         for (String device: Model.getInstance().getTestDevice()) {
             reqBuild.addTestDevice(device);
         }

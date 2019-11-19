@@ -9,6 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         style="@style/circle_progress_load"
-        android:indeterminateDuration="1000"/>
+        android:indeterminateDuration="1000" />
 
 </RelativeLayout>

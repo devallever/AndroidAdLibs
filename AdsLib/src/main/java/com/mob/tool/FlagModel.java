@@ -12,12 +12,14 @@ import com.mob.bean.Constant;
  */
 public class FlagModel {
     private static SharedPreferences sharedPreferences = null;
-    private static SharedPreferences getSharedPreferences(Context context){
-        if(sharedPreferences == null) {
-            sharedPreferences =  context.getApplicationContext().getSharedPreferences(Constant.strModelName, Context.MODE_PRIVATE);
+
+    private static SharedPreferences getSharedPreferences(Context context) {
+        if (sharedPreferences == null) {
+            sharedPreferences = context.getApplicationContext().getSharedPreferences(Constant.strModelName, Context.MODE_PRIVATE);
         }
         return sharedPreferences;
     }
+
     public static Boolean getBoolean(Context paramContext, String paramString, Boolean paramBoolean) {
         return Boolean.valueOf(getSharedPreferences(paramContext).getBoolean(paramString, paramBoolean.booleanValue()));
     }

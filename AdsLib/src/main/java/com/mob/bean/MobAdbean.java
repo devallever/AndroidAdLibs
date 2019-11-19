@@ -2,9 +2,7 @@ package com.mob.bean;
 
 import android.text.TextUtils;
 
-/**
- * Created by Administrator on 2016/8/25.
- */
+
 public class MobAdbean {
     public static final String ADMOB = "A";
     public static final String FACEBOOK = "F";
@@ -12,27 +10,25 @@ public class MobAdbean {
     public static String defPubF = "";
     public static String defPubA = "";
     public static String defPubG = "";
-    private  String category = ADMOB;
-    private  String pub = "";
+    private String category = ADMOB;
+    private String pub = "";
     private String appid = "";
     //默认值
 
 
     public String getPub() {
-        if(TextUtils.isEmpty(pub)) {
-           if(category.equals(ADMOB) ) {
-               return defPubA;
-            }
-
-            else  if(category.equals(FACEBOOK) ) {
-               return  defPubF;
-            }
-            else  if(category.equals(GDT) ) {
-               return  defPubG;
+        if (TextUtils.isEmpty(pub)) {
+            if (category.equals(ADMOB)) {
+                return defPubA;
+            } else if (category.equals(FACEBOOK)) {
+                return defPubF;
+            } else if (category.equals(GDT)) {
+                return defPubG;
             }
         }
         return pub;
     }
+
     public void setPub(String pub) {
         this.pub = pub;
     }
@@ -49,7 +45,7 @@ public class MobAdbean {
         this.appid = appId;
     }
 
-    public String getAppId(){
+    public String getAppId() {
         return appid;
     }
 }

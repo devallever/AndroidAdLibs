@@ -15,24 +15,26 @@ import com.mob.tool.Utils;
 import org.json.JSONObject;
 
 /**
- * Created by Administrator on 2016/8/29.
+ * @author allever
  */
 public class MobAdBanner extends MobAd implements IMobAdBanListener {
     public MobAdBanner(Context context) {
         super(context);
     }
+
     private Activity mActivity = null;
 
-    private  IMobAdListener mMobAdListener = null;
+    private IMobAdListener mMobAdListener = null;
+
     @Override
-    public void loadAd(final  Activity activity, final String tag , final IMobAdListener iMobAdListener) {
+    public void loadAd(final Activity activity, final String tag, final IMobAdListener iMobAdListener) {
         try {
             mMobAdListener = iMobAdListener;
             mActivity = activity;
-            String data = Model.getInstance().getOnlineData( tag);
-            Utils.printInfo("addban will " +tag);
-            if(TextUtils.isEmpty(data)) { //如果数据为空则去监听数据改变
-                Utils.printInfo("addban wait " +tag);
+            String data = Model.getInstance().getOnlineData(tag);
+            Utils.printInfo("addban will " + tag);
+            if (TextUtils.isEmpty(data)) { //如果数据为空则去监听数据改变
+                Utils.printInfo("addban wait " + tag);
                 Model.getInstance().registDataChangeObserver(new Model.NotifyObserver() {
                     @Override
                     public void onDataChange(JSONObject jsonObject) {
@@ -40,7 +42,7 @@ public class MobAdBanner extends MobAd implements IMobAdBanListener {
                             @Override
                             public void run() {
                                 Utils.printInfo("ondata " + tag);
-                                loadAd(activity,tag,iMobAdListener);
+                                loadAd(activity, tag, iMobAdListener);
                             }
                         });
                     }
@@ -52,32 +54,31 @@ public class MobAdBanner extends MobAd implements IMobAdBanListener {
             paraseData(mPolicyAds, data);
             //解析完数据后从广告链表中提取广告。
             popAdShow();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             Utils.printInfo(e.toString());
-            if(mMobAdListener != null) {
+            if (mMobAdListener != null) {
                 mMobAdListener.onAdFailedToLoad();
             }
         }
     }
 
 
-
     @Override
     public void showAd() {
-        if(mBannerView != null) {
+        if (mBannerView != null) {
             Utils.gHandle.post(new Runnable() {
                 @Override
                 public void run() {
                     try {
                         //当banner加载完毕后，则添加banner显示出来哟
-                        ViewGroup viewGroup =  Utils.findViewGroup(mActivity);
-                        if(viewGroup != null) {
+                        ViewGroup viewGroup = Utils.findViewGroup(mActivity);
+                        if (viewGroup != null) {
                             viewGroup.addView(mBannerView, getBannerLayoutParams());
                             mBannerView = null; //当显示完成后置null
                             mActivity.setContentView(viewGroup);
                         }
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                         Utils.printInfo(e.toString());
                     }
@@ -97,7 +98,7 @@ public class MobAdBanner extends MobAd implements IMobAdBanListener {
     @Override
     public void onAdBanLoaded(final MobBannerAd mobban) {
         mBannerView = mobban.getBannerView();
-        if(mMobAdListener != null) {
+        if (mMobAdListener != null) {
             mMobAdListener.onAdLoaded(this);
         }
     }
@@ -115,24 +116,24 @@ public class MobAdBanner extends MobAd implements IMobAdBanListener {
     @Override
     public void popAdShow() {
         try {
-            if(mPolicyAds.isEmpty()) {
+            if (mPolicyAds.isEmpty()) {
                 Utils.printInfo("banner ads empty");
-                if(mMobAdListener != null) {
+                if (mMobAdListener != null) {
                     mMobAdListener.onAdFailedToLoad();
                 }
                 return;
             }
-            MobAdbean adbean =  mPolicyAds.removeFirst();
+            MobAdbean adbean = mPolicyAds.removeFirst();
             MobBannerAd bannerAd = null;
-            if(adbean != null) {
+            if (adbean != null) {
 
-                if(Utils.gFactory != null) {
-                    bannerAd = Utils.gFactory.getBannerAd(mContext,adbean.getCategory(),adbean.getPub(),adbean.getAppId());
-                    if(bannerAd != null) {
+                if (Utils.gFactory != null) {
+                    bannerAd = Utils.gFactory.getBannerAd(mContext, adbean.getCategory(), adbean.getPub(), adbean.getAppId());
+                    if (bannerAd != null) {
                         bannerAd.setAdListener(this);
                         bannerAd.loadAd();
                     }
-                }else {
+                } else {
                     Utils.printInfo("MobBanner Factory is null");
                 }
 //                if(!TextUtils.isEmpty(adbean.getPub())) { //且pub不为空
@@ -149,13 +150,13 @@ public class MobAdBanner extends MobAd implements IMobAdBanListener {
 //                    bannerAd.loadAd();
 //                }
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             Utils.printInfo(e.toString());
         }
     }
 
-    private RelativeLayout.LayoutParams getBannerLayoutParams(){
+    private RelativeLayout.LayoutParams getBannerLayoutParams() {
         RelativeLayout.LayoutParams bannerParameters =
                 new RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -163,6 +164,7 @@ public class MobAdBanner extends MobAd implements IMobAdBanListener {
         bannerParameters.addRule(mBannerPos);
         return bannerParameters;
     }
+
     @Override
     public int getAdType() {
         return BANNER;

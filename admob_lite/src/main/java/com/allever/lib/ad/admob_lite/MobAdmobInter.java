@@ -17,14 +17,15 @@ import java.util.List;
 public class MobAdmobInter extends MobInterstitialAd {
 
     public MobAdmobInter(Context context, String pub) {
-        super(context,pub);
+        super(context, pub);
     }
 
     private InterstitialAd interstitialAd = null;
     private AdRequest adRequest = null;
+
     @Override
-    public void loadAd( ) {
-         interstitialAd = new InterstitialAd(mContext);
+    public void loadAd() {
+        interstitialAd = new InterstitialAd(mContext);
         interstitialAd.setAdUnitId(mPub);
         interstitialAd.setAdListener(new AdListener() {
             @Override
@@ -35,7 +36,7 @@ public class MobAdmobInter extends MobInterstitialAd {
             @Override
             public void onAdFailedToLoad(int i) {
                 super.onAdFailedToLoad(i);
-                if(mAdListener != null) {
+                if (mAdListener != null) {
                     Utils.printInfo("loadAdFaild Admob");
                     mAdListener.onAdFailedToLoad();
                     mAdListener = null;  //有些sdk可能一次请求回调多次失败或成功状态，那么我们应该避免这些问题
@@ -45,7 +46,7 @@ public class MobAdmobInter extends MobInterstitialAd {
             @Override
             public void onAdLoaded() {
                 super.onAdLoaded();
-                if(mAdListener != null) {
+                if (mAdListener != null) {
                     Utils.printInfo("onAdLoaded Admob");
                     mAdListener.onAdLoaded(MobAdmobInter.this);
                     mAdListener = null;  //有些sdk可能一次请求回调多次失败或成功状态，那么我们应该避免这些问题
@@ -56,16 +57,16 @@ public class MobAdmobInter extends MobInterstitialAd {
         //AdRequest.Builder reqBuild = new AdRequest.Builder().addTestDevice("F711E9F86475CB61F3477AB351BC65B2");
         AdRequest.Builder reqBuild = new AdRequest.Builder();
         List<String> testDevice = getTestDeviceList();
-        for (String deviceStr : testDevice){
+        for (String deviceStr : testDevice) {
             reqBuild.addTestDevice(deviceStr);
         }
-        for (String device: Model.getInstance().getTestDevice()) {
+        for (String device : Model.getInstance().getTestDevice()) {
             reqBuild.addTestDevice(device);
         }
         adRequest = reqBuild.build();
 
         interstitialAd.loadAd(adRequest);
-        Utils.printInfo("loadAd "+getTag()+mPub);
+        Utils.printInfo("loadAd " + getTag() + mPub);
 
     }
 
@@ -76,10 +77,11 @@ public class MobAdmobInter extends MobInterstitialAd {
 
     @Override
     public void showAd() {
-        if(interstitialAd != null) {
+        if (interstitialAd != null) {
             interstitialAd.show();
         }
     }
+
     @Override
     public String getTag() {
         return "Admob Inter";

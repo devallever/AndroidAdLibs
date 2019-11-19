@@ -1,8 +1,9 @@
 package com.mob.bean;
+
 import java.lang.String;
+
 /**
- * Created by maozhi on 15-8-21
- * maozhi@sunteng.com
+ * @author allever
  */
 public class Constant {
     public static final String strModelName = "RadishMobile";

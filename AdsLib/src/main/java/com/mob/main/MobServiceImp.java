@@ -11,15 +11,16 @@ import com.mob.bean.Model;
 import com.mob.tool.Utils;
 import com.umeng.analytics.MobclickAgent;
 
+
 /**
- * Created by Administrator on 2016/8/25.
+ * @author allever
  */
 public class MobServiceImp extends MobService {
 
     @Override
     public void loadInterstitalAd(Context context, String tag, IMobAdListener mobAdListener) {
-        MobAd engine  = new MobAdInter(context);
-        engine.loadAd((Activity) context,tag, mobAdListener);
+        MobAd engine = new MobAdInter(context);
+        engine.loadAd((Activity) context, tag, mobAdListener);
     }
 
 
@@ -36,13 +37,13 @@ public class MobServiceImp extends MobService {
 
     @Override
     public void loadBanner(Activity activity, String tag, IMobAdListener iMobAdListener) {
-        MobAd engine  =new MobAdBanner(activity);
-        engine.loadAd(activity,tag,iMobAdListener);
+        MobAd engine = new MobAdBanner(activity);
+        engine.loadAd(activity, tag, iMobAdListener);
     }
 
     @Override
     public void startService(Context context, String data, IMobAdFactory iMobAdFactory) {
-        if(context == null) {
+        if (context == null) {
             return;
         }
         Utils.gFactory = iMobAdFactory;
@@ -52,8 +53,8 @@ public class MobServiceImp extends MobService {
 
     @Override
     public void addTestDevice(String device) {
-        if(TextUtils.isEmpty(device)) {
-            return ;
+        if (TextUtils.isEmpty(device)) {
+            return;
         }
         Model.getInstance().addTestDevice(device);
     }

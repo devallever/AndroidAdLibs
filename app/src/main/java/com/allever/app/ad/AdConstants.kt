@@ -1,4 +1,4 @@
-//package com.allever.app.ad
+package com.allever.app.ad
 //
 //import com.allever.lib.ad.mimo.MiMoConstants.DEBUG_APP_ID
 //import com.allever.lib.ad.mimo.MiMoConstants.DEBUG_BANNER
@@ -103,3 +103,60 @@
 //    }
 //
 //}
+
+object AdConstants {
+    val data = "{\n" +
+            "    \"mobinter\": {\n" +
+            "        \"dpa\": \"\", \n" +
+            "        \"dpf\": \"\", \n" +
+            "        \"dpg\": \"\", \n" +
+            "        \"pl\": [\n" +
+            "            {\n" +
+            "                \"cate\": \"F\", \n" +
+            "                \"pub\": \"610375772464111_959722460862772\"\n" +
+            "            }\n" +
+            "        ]\n" +
+            "    }, \n" +
+            "    \"mobinter_req_a_ad\": {\n" +
+            "        \"dpa\": \"\", \n" +
+            "        \"dpf\": \"\", \n" +
+            "        \"dpg\": \"\", \n" +
+            "        \"pl\": [\n" +
+            "            {\n" +
+            "                \"cate\": \"A\", \n" +
+            "                \"pub\": \"ca-app-pub-9021314419915874/5568297355\"\n" +
+            "            }\n" +
+            "        ]\n" +
+            "    }, \n" +
+            "    \"mobinter_req_a_ad2\": {\n" +
+            "        \"dpa\": \"\", \n" +
+            "        \"dpf\": \"\", \n" +
+            "        \"dpg\": \"\", \n" +
+            "        \"pl\": [\n" +
+            "            {\n" +
+            "                \"cate\": \"F\", \n" +
+            "                \"pub\": \"610375772464111_959722460862772\"\n" +
+            "            }, \n" +
+            "            {\n" +
+            "                \"cate\": \"A\", \n" +
+            "                \"pub\": \"ca-app-pub-9021314419915874/5568297355\"\n" +
+            "            }\n" +
+            "        ]\n" +
+            "    }, \n" +
+            "    \"mobbanner\": {\n" +
+            "        \"dpa\": \"\", \n" +
+            "        \"dpf\": \"\", \n" +
+            "        \"dpg\": \"\", \n" +
+            "        \"pl\": [\n" +
+            "            {\n" +
+            "                \"cate\": \"F\", \n" +
+            "                \"pub\": \"610375772464111_683522818482739\"\n" +
+            "            }, \n" +
+            "            {\n" +
+            "                \"cate\": \"A\", \n" +
+            "                \"pub\": \"ca-app-pub-9021314419915874/3586089700\"\n" +
+            "            }\n" +
+            "        ]\n" +
+            "    }\n" +
+            "}"
+}
