@@ -51,7 +51,9 @@ public class MobAdmobBan extends MobBannerAd {
         Utils.printInfo("loadAd "+getTag()+mPub);
 
         //加载请求
-        AdRequest.Builder reqBuild = new AdRequest.Builder().addTestDevice("1621DB3C172AE6711BA840F4AEF6EF48");
+        AdRequest.Builder reqBuild = new AdRequest.Builder()
+                .addTestDevice("1621DB3C172AE6711BA840F4AEF6EF48")
+                .addTestDevice("811A5A5DA1BF1E2FC9EE39041EC322FF");
         for (String device: Model.getInstance().getTestDevice()) {
             reqBuild.addTestDevice(device);
         }

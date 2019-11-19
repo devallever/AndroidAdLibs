@@ -2,6 +2,8 @@ package com.allever.app.ad;
 
 import android.content.Context;
 
+import com.allever.lib.ad.admob.MobAdmobBan;
+import com.allever.lib.ad.admob.MobAdmobInter;
 import com.allever.lib.ad.facebook.MobFacebookBan;
 import com.allever.lib.ad.facebook.MobFacebookInter;
 import com.mob.core.MobBannerAd;
@@ -20,7 +22,7 @@ public class AdFactory implements IMobAdFactory {
                 ad = new MobFacebookBan(context,pub);
                 break;
             case "A":
-//                ad = new MobAdmobBan(context,pub);
+                ad = new MobAdmobBan(context,pub);
                 break;
         }
         return ad;
@@ -34,7 +36,7 @@ public class AdFactory implements IMobAdFactory {
                 ad = new MobFacebookInter(context,pub);
                 break;
             case "A":
-//                ad = new MobAdmobInter(context,pub);
+                ad = new MobAdmobInter(context,pub);
                 break;
         }
         return ad;

@@ -24,12 +24,6 @@ android {
     }
 }
 
-configurations.all {
-    resolutionStrategy {
-        force 'com.google.android.gms:play-services-ads-lite:18.3.0'
-    }
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':permission')

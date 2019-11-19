@@ -12,6 +12,6 @@ import com.allever.lib.common.app.App
 class MyApp: App() {
     override fun onCreate() {
         super.onCreate()
-        AdHelper.init(this, AdMobHelper, "")
+//        AdHelper.init(this, AdMobHelper, "")
     }
 }
