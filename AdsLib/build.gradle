@@ -23,6 +23,7 @@ android {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api project(path: ':common')
+    api project(path: ':adlib')
     implementation files('libs/umeng-analytics-v6.1.0.jar')
     implementation files('libs/umeng-onlineconfig_v1.0.0.jar')
 }

@@ -159,4 +159,10 @@ object AdConstants {
             "        ]\n" +
             "    }\n" +
             "}"
+
+    val ADMOB_BANNER_PUB = "ca-app-pub-9021314419915874/3586089700"
+    val ADMOB_INSERT_PUB = "ca-app-pub-9021314419915874/5568297355"
+
+    val ADMOB_LITE_BANNER_PUB = "ca-app-pub-9021314419915874/3586089700"
+    val ADMOB_LITE_INSERT_PUB = "ca-app-pub-9021314419915874/5568297355"
 }

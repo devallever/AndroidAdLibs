@@ -19,10 +19,16 @@ android {
         }
     }
 }
+configurations.all {
+    resolutionStrategy {
+        force 'com.google.android.gms:play-services-ads-lite:18.3.0'
+    }
+}
+
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api project(':AdsLib')
-    api ('com.google.android.gms:play-services-ads-lite:10.2.1')
+    api ('com.google.android.gms:play-services-ads-lite:18.3.0')
 //    api ('com.google.android.gms:play-services-ads-lite:10.2.1',{
 //        exclude group: 'com.android.support', module: 'support-v4'
 //    })
