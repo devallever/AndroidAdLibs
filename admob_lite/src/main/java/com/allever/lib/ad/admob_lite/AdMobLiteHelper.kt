@@ -9,14 +9,31 @@ import com.google.android.gms.ads.MobileAds
 object AdMobLiteHelper: AdManager {
     var testDevicesList = mutableListOf<String>()
     override fun init(context: Context, appId: String, appKey: String, appToken: String) {
-        MobileAds.initialize(context) {
-
-        }
+//        MobileAds.initialize(context) {
+//
+//        }
         testDevicesList.add("811A5A5DA1BF1E2FC9EE39041EC322FF")
         testDevicesList.add("1621DB3C172AE6711BA840F4AEF6EF48")
     }
 
-    override fun createAd(adType: ADType): BaseAd? = null
+    override fun createAd(adType: ADType): BaseAd? {
+        return when(adType) {
+            ADType.BANNER -> {
+                return createBannerAd()
+            }
+            ADType.INSERT -> {
+                return createInsertAd()
+            }
+            ADType.VIDEO -> {
+                return createVideoAd()
+            }
+            ADType.DOWNLOAD -> {
+                return createDownloadAd()
+            }
+
+            else -> null
+        }
+    }
 
     override fun createBannerAd(): BaseAd? {
         return AdMobLiteBanner()
