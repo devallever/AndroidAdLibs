@@ -5,8 +5,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 
 import com.mob.tool.Utils;
-import com.umeng.onlineconfig.OnlineConfigAgent;
-import com.umeng.onlineconfig.UmengOnlineConfigureListener;
+//import com.umeng.onlineconfig.OnlineConfigAgent;
+//import com.umeng.onlineconfig.UmengOnlineConfigureListener;
 
 import org.json.JSONObject;
 
@@ -52,28 +52,28 @@ public class Model {
         DATA = data;
         checkIsChineseVersion(Utils.gContext);
 
-        if (isChineseVersion) { //如果是中文版走友盟的那一套
-            OnlineConfigAgent.getInstance().updateOnlineConfig(Utils.gContext);
-            OnlineConfigAgent.getInstance().setOnlineConfigListener(new UmengOnlineConfigureListener() {
-                @Override
-                public void onDataReceived(final JSONObject jsonObject) {
-                    Utils.gHandle.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Iterator<SoftReference<NotifyObserver>> iterator = notifyObserverList.iterator();
-                            while (iterator.hasNext()) {
-                                SoftReference<NotifyObserver> weakReference = iterator.next();
-                                if (weakReference.get() != null) {
-                                    weakReference.get().onDataChange(jsonObject);
-                                }
-                            }
-                            notifyObserverList.clear();  //当广播完成后清空列表
-                        }
-
-                    });
-                }
-            });
-        }
+//        if (isChineseVersion) { //如果是中文版走友盟的那一套
+//            OnlineConfigAgent.getInstance().updateOnlineConfig(Utils.gContext);
+//            OnlineConfigAgent.getInstance().setOnlineConfigListener(new UmengOnlineConfigureListener() {
+//                @Override
+//                public void onDataReceived(final JSONObject jsonObject) {
+//                    Utils.gHandle.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Iterator<SoftReference<NotifyObserver>> iterator = notifyObserverList.iterator();
+//                            while (iterator.hasNext()) {
+//                                SoftReference<NotifyObserver> weakReference = iterator.next();
+//                                if (weakReference.get() != null) {
+//                                    weakReference.get().onDataChange(jsonObject);
+//                                }
+//                            }
+//                            notifyObserverList.clear();  //当广播完成后清空列表
+//                        }
+//
+//                    });
+//                }
+//            });
+//        }
     }
 
     private List<SoftReference<NotifyObserver>> notifyObserverList = new ArrayList<SoftReference<NotifyObserver>>();
@@ -109,7 +109,7 @@ public class Model {
     public String getOnlineData(String key) {
         String addata = null;
         if (isChineseVersion) { //如果是中国版本走友盟通道
-            addata = OnlineConfigAgent.getInstance().getConfigParams(Utils.gContext, key);
+//            addata = OnlineConfigAgent.getInstance().getConfigParams(Utils.gContext, key);
         } else {
 
             try {

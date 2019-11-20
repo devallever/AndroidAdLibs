@@ -9,7 +9,7 @@ import com.mob.core.MobAdBanner;
 import com.mob.core.MobAdInter;
 import com.mob.bean.Model;
 import com.mob.tool.Utils;
-import com.umeng.analytics.MobclickAgent;
+//import com.umeng.analytics.MobclickAgent;
 
 
 /**
@@ -26,12 +26,12 @@ public class MobServiceImp extends MobService {
 
     @Override
     public void onPause(Context applicationContext) {
-        MobclickAgent.onPause(applicationContext);
+//        MobclickAgent.onPause(applicationContext);
     }
 
     @Override
     public void onResume(Context applicationContext) {
-        MobclickAgent.onResume(applicationContext);
+//        MobclickAgent.onResume(applicationContext);
     }
 
 
