@@ -22,7 +22,7 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    api project(':AdsLib')
-    api 'com.google.android.gms:play-services-ads:10.2.1'
+    api project(':adlib')
+    api 'com.google.android.gms:play-services-ads:18.3.0'
 
 }
