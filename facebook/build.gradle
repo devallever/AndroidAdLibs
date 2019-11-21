@@ -22,8 +22,8 @@ android {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api project(':AdsLib')
-    api ('com.facebook.android:audience-network-sdk:4.99.0')
-//    api ('com.facebook.android:audience-network-sdk:4.99.0'){
-//        exclude group:"com.google.android.gms"
-//    }
+//    api ('com.facebook.android:audience-network-sdk:4.99.0')
+    api ('com.facebook.android:audience-network-sdk:4.99.0'){
+        exclude group:"com.google.android.gms"
+    }
 }
