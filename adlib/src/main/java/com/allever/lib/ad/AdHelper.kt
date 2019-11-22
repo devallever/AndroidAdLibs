@@ -11,7 +11,7 @@ object AdHelper {
         mAdManager?.init(context, appId, appKey, appToken)
     }
 
-    fun createAd(adType: ADType): BaseAd? {
+    fun createAd(adType: String): BaseAd? {
         return mAdManager?.createAd(adType)
     }
 

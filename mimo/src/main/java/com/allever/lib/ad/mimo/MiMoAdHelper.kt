@@ -20,7 +20,7 @@ import com.miui.zeus.mimo.sdk.listener.MimoAdListener
 import com.miui.zeus.mimo.sdk.listener.MimoRewardVideoListener
 import com.xiaomi.ad.common.pojo.AdType
 
-object MiMoAdHelper: AdManager {
+object MiMoAdHelper: AdManager() {
 
     override fun init(context: Context, appId: String, appKey: String, appToken: String) {
         // 如果担心sdk自升级会影响开发者自身app的稳定性可以关闭，
@@ -41,25 +41,6 @@ object MiMoAdHelper: AdManager {
                 log("初始化米盟失败")
             }
         })
-    }
-
-    override fun createAd(adType: ADType): BaseAd? {
-        return when(adType) {
-            ADType.BANNER -> {
-                return createBannerAd()
-            }
-            ADType.INSERT -> {
-                return createInsertAd()
-            }
-            ADType.VIDEO -> {
-                return createVideoAd()
-            }
-            ADType.DOWNLOAD -> {
-                return createDownloadAd()
-            }
-
-            else -> null
-        }
     }
 
     override fun createBannerAd(): BaseAd? {

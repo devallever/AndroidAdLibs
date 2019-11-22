@@ -7,7 +7,7 @@ import com.allever.lib.ad.BaseAd
 import com.allever.lib.common.util.loge
 import com.amazon.device.ads.AdRegistration
 
-object AmazonAdHelper: AdManager {
+object AmazonAdHelper: AdManager() {
     /***
      * appId 就是appkey
      */
@@ -21,25 +21,6 @@ object AmazonAdHelper: AdManager {
         } catch (e: IllegalArgumentException) {
             loge("IllegalArgumentException thrown: $e")
             return
-        }
-    }
-
-    override fun createAd(adType: ADType): BaseAd? {
-        return when(adType) {
-            ADType.BANNER -> {
-                return createBannerAd()
-            }
-            ADType.INSERT -> {
-                return createInsertAd()
-            }
-            ADType.VIDEO -> {
-                return createVideoAd()
-            }
-            ADType.DOWNLOAD -> {
-                return createDownloadAd()
-            }
-
-            else -> null
         }
     }
 

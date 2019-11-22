@@ -26,7 +26,7 @@ class AdMobBanner: BaseAd() {
             override fun onAdFailedToLoad(i: Int) {
                 super.onAdFailedToLoad(i)
                 adListener?.onFailed()
-                log("加载AdMob Banner 失败")
+                log("加载AdMob Banner 失败, 错误码： $i")
             }
 
             override fun onAdLoaded() {

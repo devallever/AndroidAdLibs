@@ -1,5 +1,9 @@
 package com.allever.lib.ad
 
-enum class ADType {
-    SPLASH, INSERT, BANNER, VIDEO, DOWNLOAD
+object ADType {
+    const val SPLASH = "SPLASH"
+    const val INSERT = "INSERT"
+    const val BANNER = "BANNER"
+    const val VIDEO = "VIDEO"
+    const val DOWNLOAD  = "DOWNLOAD"
 }

@@ -5,6 +5,7 @@ import com.allever.lib.ad.AdListener
 import com.allever.lib.ad.BaseAd
 import com.allever.lib.common.app.App
 import com.allever.lib.common.util.log
+import com.allever.lib.common.util.toast
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 
@@ -22,7 +23,8 @@ class AdMobInsert: BaseAd() {
             override fun onAdFailedToLoad(i: Int) {
                 super.onAdFailedToLoad(i)
                 adListener?.onFailed()
-                log("加载 AdMob Insert 失败")
+                log("加载 AdMob Insert 失败, 错误码： $i")
+                toast("加载 AdMob Insert 失败, 错误码： $i")
             }
 
             override fun onAdLoaded() {

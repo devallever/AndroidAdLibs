@@ -2,20 +2,37 @@ package com.allever.lib.ad
 
 import android.content.Context
 
-interface AdManager {
+abstract class AdManager {
 
-    fun init(context: Context, appId: String, appKey: String = "", appToken: String = "")
+    abstract fun init(context: Context, appId: String, appKey: String = "", appToken: String = "")
 
-    fun createAd(adType: ADType): BaseAd?
+    open fun createAd(adType: String): BaseAd? {
+        return when(adType) {
+            ADType.BANNER -> {
+                return createBannerAd()
+            }
+            ADType.INSERT -> {
+                return createInsertAd()
+            }
+            ADType.VIDEO -> {
+                return createVideoAd()
+            }
+            ADType.DOWNLOAD -> {
+                return createDownloadAd()
+            }
 
-    fun createBannerAd(): BaseAd?
+            else -> null
+        }
+    }
 
-    fun createInsertAd(): BaseAd?
+    abstract fun createBannerAd(): BaseAd?
 
-    fun createVideoAd(): BaseAd?
+    abstract   fun createInsertAd(): BaseAd?
 
-    fun createDownloadAd(): BaseAd?
+    abstract   fun createVideoAd(): BaseAd?
 
-    fun destroy(context: Context)
+    abstract   fun createDownloadAd(): BaseAd?
+
+    abstract   fun destroy(context: Context)
 
 }
