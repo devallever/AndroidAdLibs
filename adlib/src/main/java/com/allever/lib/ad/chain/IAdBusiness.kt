@@ -1,12 +1,13 @@
-package com.allever.lib.ad
+package com.allever.lib.ad.chain
 
 import android.content.Context
+import com.allever.lib.ad.ADType
 
-abstract class AdManager {
+abstract class IAdBusiness {
 
-    abstract fun init(context: Context, appId: String, appKey: String = "", appToken: String = "")
+    abstract fun init(context: Context, appId: String, appKey: String, appToken: String)
 
-    open fun createAd(adType: String): BaseAd? {
+    open fun createAd(adType: String): IAd? {
         return when (adType) {
             ADType.BANNER -> {
                 return createBannerAd()
@@ -25,13 +26,13 @@ abstract class AdManager {
         }
     }
 
-    abstract fun createBannerAd(): BaseAd?
+    abstract fun createBannerAd(): IAd?
 
-    abstract fun createInsertAd(): BaseAd?
+    abstract fun createInsertAd(): IAd?
 
-    abstract fun createVideoAd(): BaseAd?
+    abstract fun createVideoAd(): IAd?
 
-    abstract fun createDownloadAd(): BaseAd?
+    abstract fun createDownloadAd(): IAd?
 
     abstract fun destroy(context: Context)
 
