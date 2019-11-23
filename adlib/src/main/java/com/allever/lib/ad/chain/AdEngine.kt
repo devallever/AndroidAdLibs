@@ -19,7 +19,7 @@ class AdEngine(private val adName: String, adConfigBean: AdConfig.AdConfigBean?,
 
     fun loadAd(adChainListener: AdChainListener?) {
         if (adChainList.size > 0) {
-            log("加载 $adName")
+            log("请求 $adName")
             val chainBean = adChainList[0]
             adChainList.removeAt(0)
             val businessName = chainBean.business
@@ -44,14 +44,16 @@ class AdEngine(private val adName: String, adConfigBean: AdConfig.AdConfigBean?,
 
                 override fun onShowed() {
                     log("广告展示【$businessName】 $mAdType: $adPosition")
+                    adChainListener?.onShowed()
                 }
 
                 override fun onDismiss() {
                     log("广告消失【$businessName】 $mAdType: $adPosition")
+                    adChainListener?.onDismiss()
                 }
             }
 
-            log("加载【$businessName】$mAdType - $adPosition")
+            log("请求【$businessName】$mAdType: $adPosition")
             if (mAdType == ADType.BANNER) {
                 ad?.loadAndShow(adPosition!!, container, listener)
             } else {

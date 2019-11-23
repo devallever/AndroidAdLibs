@@ -27,7 +27,7 @@ class AdMobInsertAd: IAd() {
                 super.onAdFailedToLoad(i)
                 adListener?.onFailed("加载 AdMob Insert 失败, 错误码： $i")
                 log("加载 AdMob Insert 失败, 错误码： $i")
-                toast("加载 AdMob Insert 失败, 错误码： $i")
+//                toast("加载 AdMob Insert 失败, 错误码： $i")
             }
 
             override fun onAdLoaded() {
