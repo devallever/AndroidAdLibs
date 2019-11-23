@@ -1,5 +1,6 @@
 package com.allever.lib.ad.admob
 
+import android.view.View
 import android.view.ViewGroup
 import com.allever.lib.ad.chain.AdChainHelper
 import com.allever.lib.ad.chain.AdChainListener
@@ -38,6 +39,7 @@ class AdMobBannerAd: IAd() {
                 super.onAdLoaded()
                 log("加载 AdMob Banner 成功")
                 container?.addView(mBannerView)
+                container?.visibility = View.VISIBLE
                 adListener?.onLoaded(this@AdMobBannerAd)
             }
         }
