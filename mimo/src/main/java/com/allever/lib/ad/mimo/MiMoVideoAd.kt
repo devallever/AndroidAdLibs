@@ -10,7 +10,24 @@ class MiMoVideoAd: IAd() {
     private var mAdWorker: IRewardVideoAdWorker? = null
 
     override fun load(adPosition: String?, container: ViewGroup?, adListener: AdChainListener?) {
-        mAdWorker = MiMoBusiness.loadRewardVideo(adPosition!!, adListener)
+        mAdWorker = MiMoBusiness.loadRewardVideo(adPosition!!, object : AdChainListener {
+            override fun onLoaded(ad: IAd?) {
+                adListener?.onLoaded(this@MiMoVideoAd)
+            }
+
+            override fun onFailed(msg: String) {
+                adListener?.onFailed(msg)
+            }
+
+            override fun onShowed() {
+                adListener?.onShowed()
+            }
+
+            override fun onDismiss() {
+                adListener?.onDismiss()
+            }
+
+        })
     }
 
     override fun show() {
