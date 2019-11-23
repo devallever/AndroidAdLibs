@@ -180,14 +180,17 @@ object MiMoAdHelper: AdManager() {
 
                 override fun onAdDismissed() {
                     log("onAdDismissed")
+                    adListener?.onDismiss()
                 }
 
                 override fun onAdClick() {
                     log("onAdClick")
+                    adListener?.onClick()
                 }
 
                 override fun onStimulateSuccess() {
                     log("onStimulateSuccess")
+                    adListener?.onStimulateSuccess()
                 }
             }, adType)
         } catch (e: Exception) {

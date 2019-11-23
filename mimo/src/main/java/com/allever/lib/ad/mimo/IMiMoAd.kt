@@ -17,12 +17,15 @@ open class IMiMoAd(private val adType: AdType): IAd() {
             }
 
             override fun onFailed(msg: String) {
+                adListener?.onFailed(msg)
             }
 
             override fun onShowed() {
+                adListener?.onShowed()
             }
 
             override fun onDismiss() {
+                adListener?.onDismiss()
             }
 
         })

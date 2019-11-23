@@ -146,43 +146,46 @@ object MiMoBusiness: IAdBusiness() {
     private fun createAdWorker(
         adType: AdType,
         container: ViewGroup?,
-        AdChainListener: AdChainListener?
+        adChainListener: AdChainListener?
     ): IAdWorker? {
         var worker: IAdWorker? = null
         try {
             worker = AdWorkerFactory.getAdWorker(App.context, container, object : MimoAdListener {
                 override fun onAdLoaded(p0: Int) {
                     log("onAdLoaded")
-                    AdChainListener?.onLoaded(null)
+                    adChainListener?.onLoaded(null)
                     container?.visibility = View.VISIBLE
                 }
 
                 override fun onAdPresent() {
                     log("onAdPresent")
-                    AdChainListener?.onShowed()
+                    adChainListener?.onShowed()
                     container?.visibility = View.VISIBLE
                 }
 
                 override fun onAdFailed(msg: String?) {
                     log("onAdFailed $msg")
-                    AdChainListener?.onFailed("onAdFailed $msg")
+                    adChainListener?.onFailed("onAdFailed $msg")
                 }
 
                 override fun onAdDismissed() {
                     log("onAdDismissed")
+                    adChainListener?.onDismiss()
                 }
 
                 override fun onAdClick() {
                     log("onAdClick")
+                    adChainListener?.onClick()
                 }
 
                 override fun onStimulateSuccess() {
                     log("onStimulateSuccess")
+                    adChainListener?.onStimulateSuccess()
                 }
             }, adType)
         } catch (e: Exception) {
             e.printStackTrace()
-            AdChainListener?.onFailed("加载失败")
+            adChainListener?.onFailed("加载失败")
         }
         return worker
     }
