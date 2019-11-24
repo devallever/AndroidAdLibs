@@ -49,7 +49,18 @@ class AdMobBannerAd: IAd() {
         AdMobBusiness.testDevicesList.map {
             reqBuild.addTestDevice(it)
         }
-        mBannerView?.loadAd(reqBuild.build())
+        try {
+            mBannerView?.loadAd(reqBuild.build())
+        } catch (e: Exception) {
+            e.printStackTrace()
+            log("请求报错 AdMob Banner：${e.message}")
+            adListener?.onFailed("请求报错 AdMob Banner：${e.message}")
+        } catch (e: Error) {
+            e.printStackTrace()
+            log("请求报错 AdMob Banner：${e.message}")
+            adListener?.onFailed("请求报错 AdMob Banner：${e.message}")
+        }
+
     }
 
     override fun destroy() {

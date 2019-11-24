@@ -23,9 +23,19 @@ class AdEngine(private val adName: String, adConfigBean: AdConfig.AdConfigBean?,
             val chainBean = adChainList[0]
             adChainList.removeAt(0)
             val businessName = chainBean.business
+            if (businessName == null) {
+                adChainListener?.onFailed("广告商为空")
+                log("广告商为空")
+                return
+            }
+
             //根据business获取具体IAdBusiness
             val adPosition = chainBean.adPosition
-            val adBusiness = AdChainHelper.nameAdBusinessMap[businessName!!]
+            val adBusiness = AdChainHelper.nameAdBusinessMap[businessName]
+            if (adBusiness == null) {
+                adChainListener?.onFailed("没有该模块广告：$businessName")
+                return
+            }
             val ad = adBusiness?.createAd(mAdType!!)
             val listener = object : AdChainListener {
                 override fun onLoaded(ad: IAd?) {

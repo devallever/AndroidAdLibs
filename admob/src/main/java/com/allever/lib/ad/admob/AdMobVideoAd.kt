@@ -18,19 +18,29 @@ class AdMobVideoAd: IAd() {
 
     override fun load(adPosition: String?, container: ViewGroup?, adListener: AdChainListener?) {
         rewardedAd = RewardedAd(App.context, adPosition)
-        rewardedAd?.loadAd(
-            AdMobHelper.createAdRequest(),
-            object : RewardedAdLoadCallback() {
-                override fun onRewardedAdLoaded() {
-                    log("AdMob 激励视频 加载成功")
-                    adListener?.onLoaded(this@AdMobVideoAd)
-                }
+        try {
+            rewardedAd?.loadAd(
+                AdMobHelper.createAdRequest(),
+                object : RewardedAdLoadCallback() {
+                    override fun onRewardedAdLoaded() {
+                        log("AdMob 激励视频 加载成功")
+                        adListener?.onLoaded(this@AdMobVideoAd)
+                    }
 
-                override fun onRewardedAdFailedToLoad(errorCode: Int) {
-                    log("AdMob 激励视频 加载失败： $errorCode")
-                    adListener?.onFailed("AdMob 激励视频 加载失败： $errorCode")
-                }
-            })
+                    override fun onRewardedAdFailedToLoad(errorCode: Int) {
+                        log("AdMob 激励视频 加载失败： $errorCode")
+                        adListener?.onFailed("AdMob 激励视频 加载失败： $errorCode")
+                    }
+                })
+        } catch (e: Exception) {
+            e.printStackTrace()
+            log("请求报错 AdMob Video：${e.message}")
+            adListener?.onFailed("请求报错 AdMob Video：${e.message}")
+        } catch (e: Error) {
+            e.printStackTrace()
+            log("请求报错 AdMob Video：${e.message}")
+            adListener?.onFailed("请求报错 AdMob Video：${e.message}")
+        }
         mAdListener = adListener
     }
 

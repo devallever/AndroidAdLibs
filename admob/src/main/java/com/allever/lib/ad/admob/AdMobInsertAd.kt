@@ -43,7 +43,18 @@ class AdMobInsertAd: IAd() {
         }
         val adRequest = reqBuild.build()
 
-        interstitialAd?.loadAd(adRequest)
+        try {
+            interstitialAd?.loadAd(adRequest)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            log("请求报错 AdMob Insert：${e.message}")
+            adListener?.onFailed("请求报错 AdMob Insert：${e.message}")
+        } catch (e: Error) {
+            e.printStackTrace()
+            log("请求报错 AdMob Insert：${e.message}")
+            adListener?.onFailed("请求报错 AdMob Insert：${e.message}")
+        }
+
     }
 
     override fun show() {
