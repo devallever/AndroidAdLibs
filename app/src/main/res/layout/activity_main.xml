@@ -7,10 +7,33 @@
     tools:context=".MainActivityNew"
     android:orientation="vertical">
 
-    <Button
-        android:text="Test"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnBanner"
+            android:text="加载banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btnInsert"
+            android:text="加载插屏"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <Button
+            android:id="@+id/btnVideo"
+            android:text="加载视频"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
 
     <FrameLayout
         android:id="@+id/bannerContainer"
