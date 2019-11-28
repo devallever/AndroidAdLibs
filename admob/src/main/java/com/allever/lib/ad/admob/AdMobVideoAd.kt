@@ -80,4 +80,12 @@ class AdMobVideoAd: IAd() {
 
     override fun destroy() {
     }
+
+    override fun onAdResume() {
+
+    }
+
+    override fun onAdPause() {
+
+    }
 }

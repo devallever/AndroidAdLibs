@@ -7,4 +7,6 @@ abstract class IAd {
     abstract fun show()
     abstract fun loadAndShow(adPosition: String?, container: ViewGroup?, adListener: AdChainListener?)
     abstract fun destroy()
+    abstract fun onAdResume()
+    abstract fun onAdPause()
 }

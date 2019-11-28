@@ -44,4 +44,12 @@ class MiMoVideoAd: IAd() {
     override fun destroy() {
         MiMoBusiness.destroyVideo(mAdWorker)
     }
+
+    override fun onAdResume() {
+
+    }
+
+    override fun onAdPause() {
+
+    }
 }

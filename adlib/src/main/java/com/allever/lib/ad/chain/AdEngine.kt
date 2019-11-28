@@ -34,6 +34,7 @@ class AdEngine(private val adName: String, adConfigBean: AdConfig.AdConfigBean?,
             val adBusiness = AdChainHelper.nameAdBusinessMap[businessName]
             if (adBusiness == null) {
                 adChainListener?.onFailed("没有该模块广告：$businessName")
+                log("adBusiness = null, 没有该模块广告：$businessName")
                 return
             }
             val ad = adBusiness?.createAd(mAdType!!)

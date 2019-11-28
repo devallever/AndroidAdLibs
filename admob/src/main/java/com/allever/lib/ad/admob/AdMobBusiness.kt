@@ -13,8 +13,8 @@ object AdMobBusiness : IAdBusiness() {
         MobileAds.initialize(context) {
 
         }
-//        testDevicesList.add("811A5A5DA1BF1E2FC9EE39041EC322FF")
-//        testDevicesList.add("1621DB3C172AE6711BA840F4AEF6EF48")
+        testDevicesList.add("811A5A5DA1BF1E2FC9EE39041EC322FF")
+        testDevicesList.add("1621DB3C172AE6711BA840F4AEF6EF48")
     }
 
     override fun createBannerAd(): IAd? = AdMobBannerAd()

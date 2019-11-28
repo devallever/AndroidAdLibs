@@ -67,4 +67,12 @@ class AdMobBannerAd: IAd() {
         mBannerView?.destroy()
     }
 
+    override fun onAdResume() {
+        mBannerView?.resume()
+    }
+
+    override fun onAdPause() {
+        mBannerView?.pause()
+    }
+
 }

@@ -47,4 +47,12 @@ open class IMiMoAd(private val adType: AdType): IAd() {
     override fun destroy() {
         MiMoBusiness.destroy(mAdWorker)
     }
+
+    override fun onAdResume() {
+
+    }
+
+    override fun onAdPause() {
+
+    }
 }
