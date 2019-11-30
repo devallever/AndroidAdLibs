@@ -5,6 +5,11 @@ import com.allever.lib.ad.AdBusiness
 
 object AdConstants {
 
+    private val APPID = "ca-app-pub-8815582923430605~2604321696"
+    private const val COMMON_BANNER = "ca-app-pub-8815582923430605/1795988120"
+    private const val COMMON_INSERT = "ca-app-pub-8815582923430605/1544706681"
+    private const val COMMON_VIDEO = "ca-app-pub-8815582923430605/9291334763"
+
     val AD_NAME_INSERT = "AD_NAME_INSERT"
 
 
@@ -17,7 +22,7 @@ object AdConstants {
             "  \"business\": [\n" +
             "    {\n" +
             "      \"name\": \"${AdBusiness.A}\",\n" +
-            "      \"appId\": \"\",\n" +
+            "      \"appId\": \"$APPID\",\n" +
             "      \"appKey\": \"\",\n" +
             "      \"token\": \"\"\n" +
             "    }\n" +
@@ -29,7 +34,7 @@ object AdConstants {
             "      \"chain\": [\n" +
             "        {\n" +
             "          \"business\": \"${AdBusiness.A}\",\n" +
-            "          \"adPosition\": \"ca-app-pub-8815582923430605/1544706681\"\n" +
+            "          \"adPosition\": \"$COMMON_INSERT\"\n" +
             "        }\n" +
             "      ]\n" +
             "    },\n" +
@@ -39,7 +44,7 @@ object AdConstants {
             "      \"chain\": [\n" +
             "        {\n" +
             "          \"business\": \"${AdBusiness.A}\",\n" +
-            "          \"adPosition\": \"ca-app-pub-8815582923430605/1795988120\"\n" +
+            "          \"adPosition\": \"$COMMON_BANNER\"\n" +
             "        }\n" +
             "      ]\n" +
             "    },\n" +
@@ -49,7 +54,7 @@ object AdConstants {
             "      \"chain\": [\n" +
             "        {\n" +
             "          \"business\": \"${AdBusiness.A}\",\n" +
-            "          \"adPosition\": \"ca-app-pub-8815582923430605/9291334763\"\n" +
+            "          \"adPosition\": \"$COMMON_VIDEO\"\n" +
             "        }\n" +
             "      ]\n" +
             "    }\n" +
