@@ -4,6 +4,7 @@ import android.content.Context
 import com.allever.lib.ad.ADType
 import com.allever.lib.ad.AdManager
 import com.allever.lib.ad.BaseAd
+import com.allever.lib.common.util.log
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 
@@ -39,6 +40,23 @@ object AdMobHelper: AdManager() {
             reqBuild.addTestDevice(device)
         }
         return reqBuild.build()
+    }
+
+    internal fun logError(errorCode:  Int) {
+        when (errorCode) {
+            0 -> {
+                log("内部错误")
+            }
+            1 -> {
+                log("")
+            }
+            2 -> {
+                log("网络异常")
+            }
+            3 -> {
+                log("没填充")
+            }
+        }
     }
 
 }

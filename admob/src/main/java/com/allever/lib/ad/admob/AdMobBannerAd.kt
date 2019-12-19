@@ -2,7 +2,6 @@ package com.allever.lib.ad.admob
 
 import android.view.View
 import android.view.ViewGroup
-import com.allever.lib.ad.chain.AdChainHelper
 import com.allever.lib.ad.chain.AdChainListener
 import com.allever.lib.ad.chain.IAd
 import com.allever.lib.common.app.App
@@ -31,8 +30,9 @@ class AdMobBannerAd: IAd() {
         mBannerView?.adListener = object : com.google.android.gms.ads.AdListener() {
             override fun onAdFailedToLoad(i: Int) {
                 super.onAdFailedToLoad(i)
-                adListener?.onFailed("加载AdMob Banner 失败, 错误码： $i")
                 log("加载 AdMob Banner 失败, 错误码： $i")
+                AdMobHelper.logError(i)
+                adListener?.onFailed("加载AdMob Banner 失败, 错误码： $i")
             }
 
             override fun onAdLoaded() {
@@ -41,6 +41,11 @@ class AdMobBannerAd: IAd() {
                 container?.addView(mBannerView)
                 container?.visibility = View.VISIBLE
                 adListener?.onLoaded(this@AdMobBannerAd)
+            }
+
+            override fun onAdClosed() {
+                super.onAdClosed()
+                adListener?.onDismiss()
             }
         }
 

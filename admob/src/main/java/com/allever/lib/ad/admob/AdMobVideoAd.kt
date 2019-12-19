@@ -29,6 +29,7 @@ class AdMobVideoAd: IAd() {
 
                     override fun onRewardedAdFailedToLoad(errorCode: Int) {
                         log("AdMob 激励视频 加载失败： $errorCode")
+                        AdMobHelper.logError(errorCode)
                         adListener?.onFailed("AdMob 激励视频 加载失败： $errorCode")
                     }
                 })
