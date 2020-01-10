@@ -26,7 +26,6 @@ class AdEngine(private val adName: String, adConfigBean: AdConfig.AdConfigBean?,
             if (businessName == null) {
                 adChainListener?.onFailed("广告商为空")
                 log("广告商为空")
-                return
             }
 
             //根据business获取具体IAdBusiness
@@ -35,6 +34,11 @@ class AdEngine(private val adName: String, adConfigBean: AdConfig.AdConfigBean?,
             if (adBusiness == null) {
                 adChainListener?.onFailed("没有该模块广告：$businessName")
                 log("adBusiness = null, 没有该模块广告：$businessName")
+                if (adChainList.isEmpty()) {
+                    adChainListener?.onFailed("广告商为空")
+                } else {
+                    loadAd(adChainListener)
+                }
                 return
             }
             val ad = adBusiness?.createAd(mAdType!!)
