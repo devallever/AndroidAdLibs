@@ -3,6 +3,7 @@ package com.allever.lib.ad.admob
 import android.view.View
 import android.view.ViewGroup
 import com.allever.lib.ad.chain.AdChainListener
+import com.allever.lib.ad.chain.BannerLayout
 import com.allever.lib.ad.chain.IAd
 import com.allever.lib.common.app.App
 import com.allever.lib.common.util.log
@@ -38,7 +39,14 @@ class AdMobBannerAd: IAd() {
             override fun onAdLoaded() {
                 super.onAdLoaded()
                 log("加载 AdMob Banner 成功")
-                container?.addView(mBannerView)
+                val bannerLayout = container as? BannerLayout
+                val bannerContainer = bannerLayout?.bannerContainer
+                if (bannerContainer != null) {
+                    bannerContainer.addView(mBannerView)
+                } else {
+                    container?.addView(mBannerView)
+                }
+                
                 container?.visibility = View.VISIBLE
                 adListener?.onLoaded(this@AdMobBannerAd)
             }
