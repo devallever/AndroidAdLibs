@@ -35,14 +35,9 @@ public class BannerLayout extends RelativeLayout {
         init();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public BannerLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
     private void init() {
         View root = LayoutInflater.from(getContext()).inflate(R.layout.banner_layout, this);
-        mBannerContainer = root.findViewById(R.id.bannerContainer);
+        mBannerContainer = root.findViewById(R.id.adLibBannerContainer);
     }
 
     public ViewGroup getBannerContainer() {

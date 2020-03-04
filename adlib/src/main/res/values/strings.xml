@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">adlib</string>
+    <string name="adlib_app_name">adlib</string>
 
 
     <string name="adlib_ad_flag">Ad</string>
