@@ -20,6 +20,8 @@ object AdConstants {
 
     val AD_NAME_NATIVE = "AD_NAME_NATIVE"
 
+    val AD_NAME_NATIVE_SMALL = "AD_NAME_NATIVE_SMALL"
+
     val adData = "{\n" +
             "  \"business\": [\n" +
             "    {\n" +
@@ -43,6 +45,16 @@ object AdConstants {
             "    {\n" +
             "      \"name\": \"$AD_NAME_NATIVE\",\n" +
             "      \"type\": \"${ADType.NATIVE}\",\n" +
+            "      \"chain\": [\n" +
+            "        {\n" +
+            "          \"business\": \"${AdBusiness.A}\",\n" +
+            "          \"adPosition\": \"$COMMON_NATIVE\"\n" +
+            "        }\n" +
+            "      ]\n" +
+            "    },\n" +
+            "    {\n" +
+            "      \"name\": \"$AD_NAME_NATIVE_SMALL\",\n" +
+            "      \"type\": \"${ADType.NATIVE_SMALL}\",\n" +
             "      \"chain\": [\n" +
             "        {\n" +
             "          \"business\": \"${AdBusiness.A}\",\n" +

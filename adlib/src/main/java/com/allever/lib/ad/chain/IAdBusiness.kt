@@ -22,7 +22,10 @@ abstract class IAdBusiness {
                 return createDownloadAd()
             }
             ADType.NATIVE -> {
-                return createNativeAd()
+                return createNativeAd(ADType.NATIVE)
+            }
+            ADType.NATIVE_SMALL -> {
+                return createNativeAd(ADType.NATIVE_SMALL)
             }
 
             else -> null
@@ -37,7 +40,7 @@ abstract class IAdBusiness {
 
     abstract fun createDownloadAd(): IAd?
     
-    abstract fun createNativeAd(): IAd?
+    abstract fun createNativeAd(adType: String): IAd?
 
     abstract fun destroy(context: Context)
 

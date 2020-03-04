@@ -7,4 +7,5 @@ object ADType {
     const val VIDEO = "VIDEO"
     const val DOWNLOAD  = "DOWNLOAD"
     const val NATIVE = "NATIVE"
+    const val NATIVE_SMALL = "NATIVE_SMALL"
 }

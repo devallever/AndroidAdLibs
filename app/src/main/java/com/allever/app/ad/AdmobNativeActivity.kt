@@ -17,7 +17,7 @@ class AdmobNativeActivity: BaseActivity() {
 
     private var mNativeAd: IAd? = null
     private fun loadNative() {
-        AdChainHelper.loadAd(AdConstants.AD_NAME_NATIVE, nativeAdContainer, object : AdChainListener {
+        AdChainHelper.loadAd(AdConstants.AD_NAME_NATIVE_SMALL, nativeAdContainer, object : AdChainListener {
             override fun onLoaded(ad: IAd?) {
                 mNativeAd = ad
                 mNativeAd?.show()

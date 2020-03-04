@@ -1,7 +1,7 @@
 package com.allever.lib.ad
 
 import android.content.Context
-
+@Deprecated("")
 abstract class AdManager {
 
     abstract fun init(context: Context, appId: String, appKey: String = "", appToken: String = "")

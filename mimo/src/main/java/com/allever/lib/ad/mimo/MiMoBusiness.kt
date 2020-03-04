@@ -3,6 +3,7 @@ package com.allever.lib.ad.mimo
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import com.allever.lib.ad.ADType
 import com.allever.lib.ad.chain.AdChainListener
 import com.allever.lib.ad.chain.IAd
 import com.allever.lib.ad.chain.IAdBusiness
@@ -49,7 +50,7 @@ object MiMoBusiness: IAdBusiness() {
 
     override fun createDownloadAd(): IAd? = null
 
-    override fun createNativeAd(): IAd? = null
+    override fun createNativeAd(adType: String): IAd? = null
 
     override fun destroy(context: Context) {
 
