@@ -12,6 +12,7 @@ import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdCallback
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 
+@Deprecated("")
 class AdMobVideo: BaseAd() {
 
     private var rewardedAd: RewardedAd? = null

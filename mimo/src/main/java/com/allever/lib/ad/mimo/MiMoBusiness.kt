@@ -49,6 +49,8 @@ object MiMoBusiness: IAdBusiness() {
 
     override fun createDownloadAd(): IAd? = null
 
+    override fun createNativeAd(): IAd? = null
+
     override fun destroy(context: Context) {
 
     }
@@ -68,8 +70,17 @@ object MiMoBusiness: IAdBusiness() {
         AdChainListener: AdChainListener?
     ): IAdWorker? {
         val adWorker = createAdWorker(adType, container, AdChainListener)
-        adWorker?.load(adPosition)
-        return adWorker
+        if (adPosition == "") {
+            log("广告位为空")
+            return null
+        }
+        return try {
+            adWorker?.load(adPosition)
+            adWorker
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 
     fun loadAndShow(
@@ -79,8 +90,18 @@ object MiMoBusiness: IAdBusiness() {
         AdChainListener: AdChainListener?
     ): IAdWorker? {
         val adWorker = createAdWorker(adType, container, AdChainListener)
-        adWorker?.loadAndShow(adPosition)
-        return adWorker
+        if (adPosition == "") {
+            log("广告位为空")
+            return null
+        }
+        return try {
+            adWorker?.loadAndShow(adPosition)
+            adWorker
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+
     }
 
     fun loadRewardVideo(adPosition: String, AdChainListener: AdChainListener?): IRewardVideoAdWorker? {

@@ -9,6 +9,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 
+@Deprecated("")
 class AdMobBanner: BaseAd() {
     private var mBannerView: AdView? = null
     override fun load(adPosition: String, container: ViewGroup?, adListener: AdListener?) {

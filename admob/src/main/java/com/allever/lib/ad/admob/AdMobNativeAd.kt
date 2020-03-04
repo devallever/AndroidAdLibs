@@ -1,0 +1,118 @@
+package com.allever.lib.ad.admob
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.allever.lib.ad.chain.AdChainListener
+import com.allever.lib.ad.chain.IAd
+import com.allever.lib.common.app.App
+import com.allever.lib.common.util.log
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.formats.UnifiedNativeAd
+
+class AdMobNativeAd: IAd() {
+
+    private var nativeAdView: TemplateView? = null
+    private var unifiedNativeAd: UnifiedNativeAd? = null
+    private var mContainer: ViewGroup? = null
+
+//    override fun load(adPosition: String?, container: ViewGroup?, adListener: AdChainListener?) {
+//        nativeAdView = LayoutInflater.from(App.context).inflate(R.layout.common_native_layout, container) as UnifiedNativeAdView
+////        nativeAdView
+//
+//        //加载请求
+//        val reqBuild = AdRequest.Builder()
+//        for (device in AdMobBusiness.testDevicesList) {
+//            reqBuild.addTestDevice(device)
+//        }
+//        val adRequest = reqBuild.build()
+//
+//
+//        val adLoader = AdLoader.Builder(App.context, adPosition)
+//            .forUnifiedNativeAd { unifiedNativeAd ->
+////                val styles = NativeTemplateStyle.Builder().build()
+////                my_template.setStyles(styles)
+////                my_template.setNativeAd(unifiedNativeAd)
+////                nativeAdView = findViewById()
+//                val mediaView = nativeAdView?.findViewById<MediaView>(R.id.mediaView)
+//                mediaView?.setMediaContent(unifiedNativeAd.mediaContent)
+//                
+//                val iconView = nativeAdView?.findViewById<ImageView>(R.id.ivLogo)
+//                val iconImage = unifiedNativeAd.icon
+//                iconView?.setImageDrawable(iconImage.drawable)
+//                nativeAdView?.iconView = iconView
+//                
+//                val headView = nativeAdView?.findViewById<TextView>(R.id.tvHeadLine)
+//                headView?.text = unifiedNativeAd.headline
+//                nativeAdView?.headlineView = headView
+//                
+//                val descView = nativeAdView?.findViewById<TextView>(R.id.tvDesc)
+////                descView?.text = unifiedNativeAd.
+////                adListener?.onLoaded(this)
+//            }
+//            .build()
+//        adLoader.loadAd(adRequest)
+//    }
+
+    override fun load(adPosition: String?, container: ViewGroup?, adListener: AdChainListener?) {
+        mContainer = container
+        mContainer?.visibility = View.GONE
+        val root = LayoutInflater.from(App.context).inflate(R.layout.native_ad_layout, container)
+        nativeAdView = root.findViewById(R.id.templateView)
+        val styles = NativeTemplateStyle.Builder().build()
+        nativeAdView?.setStyles(styles)
+
+        //加载请求
+        val reqBuild = AdRequest.Builder()
+        for (device in AdMobBusiness.testDevicesList) {
+            reqBuild.addTestDevice(device)
+        }
+        val adRequest = reqBuild.build()
+
+
+        val adLoader = AdLoader.Builder(App.context, adPosition)
+            .forUnifiedNativeAd { unifiedNativeAd ->
+                log("加载 AdMob Native 成功")
+                this.unifiedNativeAd = unifiedNativeAd
+                adListener?.onLoaded(this)
+
+
+//                nativeAdView?.setNativeAd(unifiedNativeAd)
+//                nativeAdView?.visibility = View.GONE
+            }
+            .withAdListener(object : AdListener() {
+                override fun onAdFailedToLoad(errorCode: Int) {
+                    super.onAdFailedToLoad(errorCode)
+                    log("加载 AdMob Native 失败, 错误码： $errorCode")
+                    AdMobHelper.logError(errorCode)
+                    adListener?.onFailed("加载 AdMob Native 失败, 错误码： $errorCode")
+                }
+            })
+            .build()
+        adLoader.loadAd(adRequest)
+    }
+
+    override fun show() {
+        mContainer?.visibility = View.VISIBLE
+        nativeAdView?.setNativeAd(unifiedNativeAd)
+    }
+
+    override fun loadAndShow(
+        adPosition: String?,
+        container: ViewGroup?,
+        adListener: AdChainListener?
+    ) {
+    }
+
+    override fun destroy() {
+        nativeAdView?.destroyNativeAd()
+    }
+
+    override fun onAdResume() {
+    }
+
+    override fun onAdPause() {
+    }
+}

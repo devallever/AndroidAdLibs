@@ -20,6 +20,9 @@ abstract class AdManager {
             ADType.DOWNLOAD -> {
                 return createDownloadAd()
             }
+            ADType.NATIVE -> {
+                return null
+            }
 
             else -> null
         }

@@ -13,7 +13,7 @@ class AmazonVideo : BaseAd(){
     }
 
     override fun loadAndShow(adPosition: String, container: ViewGroup?, adListener: AdListener?) {
-        adListener?.onFailed()
+        adListener?.onLoaded()
     }
 
     override fun destroy() {

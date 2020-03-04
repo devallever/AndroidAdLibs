@@ -9,6 +9,7 @@ import com.allever.lib.common.util.toast
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 
+@Deprecated("")
 class AdMobInsert: BaseAd() {
     private var interstitialAd: InterstitialAd? = null
     override fun load(adPosition: String, container: ViewGroup?, adListener: AdListener?) {

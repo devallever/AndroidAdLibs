@@ -21,6 +21,9 @@ abstract class IAdBusiness {
             ADType.DOWNLOAD -> {
                 return createDownloadAd()
             }
+            ADType.NATIVE -> {
+                return createNativeAd()
+            }
 
             else -> null
         }
@@ -33,6 +36,8 @@ abstract class IAdBusiness {
     abstract fun createVideoAd(): IAd?
 
     abstract fun createDownloadAd(): IAd?
+    
+    abstract fun createNativeAd(): IAd?
 
     abstract fun destroy(context: Context)
 
