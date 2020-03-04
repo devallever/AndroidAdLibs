@@ -38,7 +38,7 @@ object AdMobBusiness : IAdBusiness() {
 
     override fun createDownloadAd(): IAd? = null
 
-    override fun createNativeAd(): IAd? = AdMobNativeAd()
+    override fun createNativeAd(adType: String): IAd? = AdMobNativeAd(adType)
 
     override fun destroy(context: Context) {
     }

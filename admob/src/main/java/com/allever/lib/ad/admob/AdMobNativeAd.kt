@@ -3,6 +3,7 @@ package com.allever.lib.ad.admob
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.allever.lib.ad.ADType
 import com.allever.lib.ad.chain.AdChainListener
 import com.allever.lib.ad.chain.IAd
 import com.allever.lib.common.app.App
@@ -12,7 +13,7 @@ import com.google.android.gms.ads.AdLoader
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.formats.UnifiedNativeAd
 
-class AdMobNativeAd: IAd() {
+class AdMobNativeAd(var adType: String): IAd() {
 
     private var nativeAdView: TemplateView? = null
     private var unifiedNativeAd: UnifiedNativeAd? = null
@@ -59,7 +60,12 @@ class AdMobNativeAd: IAd() {
     override fun load(adPosition: String?, container: ViewGroup?, adListener: AdChainListener?) {
         mContainer = container
         mContainer?.visibility = View.GONE
-        val root = LayoutInflater.from(App.context).inflate(R.layout.native_ad_layout, container)
+        val root = if (adType == ADType.NATIVE) {
+            LayoutInflater.from(App.context).inflate(R.layout.native_ad_layout, container)
+        } else {
+            LayoutInflater.from(App.context).inflate(R.layout.native_ad_small_layout, container)
+        }
+        
         nativeAdView = root.findViewById(R.id.templateView)
         val styles = NativeTemplateStyle.Builder().build()
         nativeAdView?.setStyles(styles)
@@ -77,10 +83,6 @@ class AdMobNativeAd: IAd() {
                 log("加载 AdMob Native 成功")
                 this.unifiedNativeAd = unifiedNativeAd
                 adListener?.onLoaded(this)
-
-
-//                nativeAdView?.setNativeAd(unifiedNativeAd)
-//                nativeAdView?.visibility = View.GONE
             }
             .withAdListener(object : AdListener() {
                 override fun onAdFailedToLoad(errorCode: Int) {
@@ -88,6 +90,12 @@ class AdMobNativeAd: IAd() {
                     log("加载 AdMob Native 失败, 错误码： $errorCode")
                     AdMobHelper.logError(errorCode)
                     adListener?.onFailed("加载 AdMob Native 失败, 错误码： $errorCode")
+                }
+
+                override fun onAdClosed() {
+                    super.onAdClosed()
+                    log("AdMob Native 消失")
+                    adListener?.onDismiss()
                 }
             })
             .build()
