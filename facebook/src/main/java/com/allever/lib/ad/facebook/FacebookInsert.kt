@@ -10,7 +10,8 @@ import com.facebook.ads.AdError
 import com.facebook.ads.InterstitialAd
 import com.facebook.ads.InterstitialAdListener
 
-class FacebookInsert: BaseAd() {
+@Deprecated("")
+class FacebookInsert : BaseAd() {
     private var interstitialAd: InterstitialAd? = null
     override fun load(adPosition: String, container: ViewGroup?, adListener: AdListener?) {
         interstitialAd = InterstitialAd(App.context, adPosition)

@@ -10,7 +10,9 @@ import com.facebook.ads.AdError
 import com.facebook.ads.AdSize
 import com.facebook.ads.AdView
 
-class FacebookBanner: BaseAd() {
+
+@Deprecated("")
+class FacebookBanner : BaseAd() {
 
     private var facebookbanner: AdView? = null
 
